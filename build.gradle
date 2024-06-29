@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'br.com.ti.roberto'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.21.0'
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: '4.1.20'
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: '4.1.20'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-junit5', version: '4.1.20'
+
+}
+
+test {
+    useJUnitPlatform()
+}
