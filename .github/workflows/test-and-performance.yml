@@ -51,8 +51,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y gnupg2
-          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 33C235A34C46AA3FFB293709A328C3A2C3C45C06
-          echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
+          curl -s https://dl.cloudsmith.io/public/k6/k6/gpg.key | sudo apt-key add -
+          echo "deb https://dl.cloudsmith.io/public/k6/k6/deb/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/k6.list
           sudo apt-get update
           sudo apt-get install -y k6
 
