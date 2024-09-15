@@ -47,14 +47,11 @@ jobs:
           ./gradlew test -Dwebdriver.chrome.driver.headless=true --tests "PageObjectWebTest"
 
       # 7. Install k6 (for performance testing)
-      - name: Install K6
+      - name: Install K6 via Snap
         run: |
           sudo apt-get update
-          sudo apt-get install -y gnupg2 curl
-          curl -fsSL https://dl.cloudsmith.io/public/k6/k6/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/cloudsmith-k6.gpg > /dev/null
-          echo "deb [signed-by=/usr/share/keyrings/cloudsmith-k6.gpg] https://dl.cloudsmith.io/public/k6/k6/deb/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/k6.list
-          sudo apt-get update
-          sudo apt-get install -y k6
+          sudo apt-get install -y snapd
+          sudo snap install k6
 
       # 8. Create directory for k6 results
       - name: Create k6 results directory
