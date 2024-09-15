@@ -7,7 +7,7 @@ export let options = {
 };
 
 export default function () {
-    let res = http.get('https://seu-endpoint.com/api/test');
+    let res = http.get('https://www.saucedemo.com/');
 
     // Check if the response was successful (status 200)
     check(res, {
