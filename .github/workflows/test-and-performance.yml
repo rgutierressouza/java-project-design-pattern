@@ -50,6 +50,10 @@ jobs:
       - name: Install K6
         run: |
           sudo apt-get update
+          sudo apt-get install -y gnupg2
+          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 33C235A34C46AA3FFB293709A328C3A2C3C45C06
+          echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
+          sudo apt-get update
           sudo apt-get install -y k6
 
       # 8. Create directory for k6 results
