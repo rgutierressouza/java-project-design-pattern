@@ -22,7 +22,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      # 3. Install Gradle
+      # 3. Set executable permissions for gradlew
+      - name: Grant execute permission for Gradle Wrapper
+        run: chmod +x ./gradlew
+
+      # 4. Install Gradle
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -31,33 +35,33 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # 4. Install Chrome
+      # 5. Install Chrome
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # 5. Run UI Tests with Gradle in headless mode
+      # 6. Run UI Tests with Gradle in headless mode
       - name: Run UI Tests with Gradle
         run: |
           ./gradlew test -Dwebdriver.chrome.driver.headless=true --tests "PageObjectWebTest"
 
-      # 6. Install k6 (for performance testing)
+      # 7. Install k6 (for performance testing)
       - name: Install K6
         run: |
           sudo apt-get update
           sudo apt-get install -y k6
 
-      # 7. Create directory for k6 results
+      # 8. Create directory for k6 results
       - name: Create k6 results directory
         run: mkdir -p k6-results
 
-      # 8. Run performance test with k6 and save results
+      # 9. Run performance test with k6 and save results
       - name: Run K6 Performance Test
         run: |
           k6 run performance-tests/script.js --out json=k6-results/results.json
 
-      # 9. Publish k6 results as GitHub Actions artifacts
+      # 10. Publish k6 results as GitHub Actions artifacts
       - name: Upload K6 Results
         uses: actions/upload-artifact@v3
         with:
